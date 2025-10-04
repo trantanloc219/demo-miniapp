@@ -1,17 +1,16 @@
 # .nixpacks.toml
-# 🚀 Nixpacks build config cho EasyPanel / Railway
-# Dùng Node 22.12+ để tương thích với Vite 6 và Rolldown
-
+# Đảm bảo EasyPanel build với Node.js 22.12+
 [phases.setup]
 nodejs_version = "22.12.0"
 
 [phases.install]
-cmds = ["npm install"]
+cmds = ["npm ci"]
 
 [phases.build]
 cmds = [
-  # Dọn sạch cache đề phòng Rolldown lỗi
-  "rm -rf node_modules package-lock.json && npm cache clean --force && npm install",
+  "rm -rf node_modules package-lock.json",
+  "npm cache clean --force",
+  "npm ci",
   "npm run build"
 ]
 
