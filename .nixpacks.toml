@@ -1,0 +1,18 @@
+# .nixpacks.toml
+# Đảm bảo EasyPanel build với Node.js 22.12+
+[phases.setup]
+nodejs_version = "22.12.0"
+
+[phases.install]
+cmds = ["npm ci"]
+
+[phases.build]
+cmds = [
+  "rm -rf node_modules package-lock.json",
+  "npm cache clean --force",
+  "npm ci",
+  "npm run build"
+]
+
+[start]
+cmd = "npm run dev"
