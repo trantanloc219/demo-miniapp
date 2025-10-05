@@ -1,7 +1,6 @@
 # .nixpacks.toml
 
 [phases.setup]
-# 🟢 Dùng Node 22 thay vì Node 20
 nixPkgs = ["bash", "nodejs_22"]
 
 [phases.caddy]
@@ -12,7 +11,7 @@ cmds = ["caddy fmt --overwrite /assets/Caddyfile"]
 cmds = ["npm ci"]
 
 [phases.build]
-cmds = ["npm run build"]
+cmds = ["VITE_SKIP_NODE_VERSION_CHECK=true npm run build"]
 
 [start]
 cmd = "caddy run --config /assets/Caddyfile --adapter caddyfile 2>&1"
