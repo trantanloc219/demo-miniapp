@@ -1,8 +1,10 @@
 # .nixpacks.toml
 
 [phases.setup]
-# ❗ Chỉ giữ nodejs_20, không thêm npm hay npm-9_x
-nixPkgs = ["bash", "nodejs_20"]
+nixPkgs = ["bash", "nodejs_20_19"]
+
+[variables]
+NIXPACKS_NODE_VERSION = "20.19"
 
 [phases.caddy]
 pkgs = ["caddy"]
