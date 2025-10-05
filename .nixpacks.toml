@@ -1,18 +1,16 @@
 # .nixpacks.toml
-# Đảm bảo EasyPanel build với Node.js 22.12+
 [phases.setup]
-nodejs_version = "22.12.0"
+nixPkgs = ["bash", "nodejs_20", "npm"]
+
+[phases.caddy]
+pkgs = ["caddy"]
+cmds = ["caddy fmt --overwrite /assets/Caddyfile"]
 
 [phases.install]
 cmds = ["npm ci"]
 
 [phases.build]
-cmds = [
-  "rm -rf node_modules package-lock.json",
-  "npm cache clean --force",
-  "npm ci",
-  "npm run build"
-]
+cmds = ["npm run build"]
 
 [start]
-cmd = "npm run dev"
+cmd = "caddy run --config /assets/Caddyfile --adapter caddyfile 2>&1"
